@@ -1,0 +1,30 @@
+name: Private Container Registry Remove
+description: Remove old image tags from Private Container Registry
+branding:
+  icon: 'trash'
+  color: 'blue'
+
+inputs:
+  repository:
+    description: Private image registry url without https://
+    required: true
+  image:
+    description: Image as it appear in /v2/_catalog repositories array
+    required: true
+  user:
+    description: Username of the Container Registry
+    required: true
+  password:
+    description: Password of the Container Registry
+    required: true
+  levels:
+    description: Number of recent images. Default is 5
+    required: false
+    default: 5
+
+runs:
+  using: composite
+  steps:
+    - name: Remove images older than the last n versions
+      shell: bash
+      run: ${{ github.action_path }}/remove_images.sh ${{ inputs.repository }} ${{ inputs.image }} ${{ inputs.user }} ${{ inputs.password }} ${{ inputs.levels }}
