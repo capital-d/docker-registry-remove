@@ -9,7 +9,7 @@ Add this step to a job to automatically delete older images as part of a job:
 
 ```yaml
     - name: Remove old images from Container Registry
-      uses: capital-d/private-registry-image-remove@v0.1
+      uses: capital-d/docker-registry-remove@0.1
       with:
         repository: image-repository # Private image registry url without https://
         image: repository/image # Image as it appear in /v2/_catalog repositories array
